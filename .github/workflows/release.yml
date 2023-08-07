@@ -1,9 +1,12 @@
 name: Release New Version
 
+# on:
+#   push:
+#     tags:
+#       - 'v*'
+
 on:
-  push:
-    tags:
-      - 'v*'
+  pull_request:
 
 env:
   RELEASE_VERSION: ''
@@ -28,9 +31,9 @@ jobs:
           # flit publish
       - name: Create Release Notes
         run:
-          echo "Changelog for release ${env.RELEASE_NOTE_VERSION}:"
-          cz changelog --file-name ${env.RELEASE_NOTES_BODY_FILE} ${env.RELEASE_NOTE_VERSION}
-          cat ${env.RELEASE_NOTES_BODY_FILE}
+          echo "Changelog for release ${RELEASE_NOTE_VERSION}:"
+          cz changelog --file-name ${RELEASE_NOTES_BODY_FILE} ${RELEASE_NOTE_VERSION}
+          cat ${RELEASE_NOTES_BODY_FILE}
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
