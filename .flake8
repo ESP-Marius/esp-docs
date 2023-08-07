@@ -1,5 +1,4 @@
 [flake8]
-exclude = citools/
 max-line-length = 160
 per-file-ignores =
     # conf.py files use star imports to setup config variables
