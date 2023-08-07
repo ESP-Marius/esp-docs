@@ -26,16 +26,16 @@ jobs:
           FLIT_USERNAME: __token__
           FLIT_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run:
-          echo "{env.RELEASE_NOTE_VERSION}={$(git describe --tags)}" >> "$GITHUB_ENV"
+          echo "{env.RELEASE_VERSION}={$(git describe --tags --abbrev=0)}" >> "$GITHUB_ENV"
           # pip install flit
           # flit publish
       - name: Create Release Notes
         run:
-          echo "Changelog for release ${RELEASE_NOTE_VERSION}:"
-          cz changelog --file-name ${RELEASE_NOTES_BODY_FILE} ${RELEASE_NOTE_VERSION}
+          echo "Changelog for release ${RELEASE_VERSION}:"
+          cz changelog --file-name ${RELEASE_NOTES_BODY_FILE} ${RELEASE_VERSION}
           cat ${RELEASE_NOTES_BODY_FILE}
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
           body_path: ${{ env.RELEASE_NOTES_BODY_FILE }}
-          tag_name: ${{ env.RELEASE_NOTE_VERSION }}
+          tag_name: ${{ env.RELEASE_VERSION }}
