@@ -43,7 +43,7 @@ deploy-docs = "esp_docs.deploy_docs:main"
 [tool.commitizen]
 name = "cz_conventional_commits"
 tag_format = "v$version"
-version = "1.6.2"
+version = "1.6.3"
 changelog_start_rev = "v1.5.0"
 version_files = [
     "src/esp_docs/__version__.py",
