@@ -1,6 +1,51 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel"
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "esp_docs"
+authors = [{name = "Espressif", email = "marius.vikhammer@espressif.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: MIT License"]
+
+dynamic = ["version", "description"]
+requires-python = ">=3.7"
+
+dependencies = [
+    "docutils<0.18",
+    "pillow<10.0.0",
+    "cairosvg==2.5.1", # required by sphinxcontrib-svg2pdfconverter[CairoSVG]
+    "sphinx==4.5.0",
+    "breathe==4.33.1",
+    "sphinx-copybutton==0.5.0",
+    "sphinx-notfound-page",
+    "sphinxcontrib-blockdiag==3.0.0",
+    "sphinxcontrib-seqdiag==3.0.0",
+    "sphinxcontrib-actdiag==3.0.0",
+    "sphinxcontrib-nwdiag==2.0.0",
+    "sphinxcontrib-wavedrom>=3.0,<3.1",
+    "sphinxcontrib-svg2pdfconverter[CairoSVG]==1.2.0",
+    "nwdiag==2.0.0",
+    "recommonmark",
+    "sphinx_selective_exclude==1.0.3",
+    "sphinx_idf_theme==1.1.0",
 ]
-build-backend = "setuptools.build_meta"
+
+[project.urls]
+Home = "https://github.com/espressif/esp-docs"
+
+[project.scripts]
+build-docs = "esp_docs.build_docs:main"
+deploy-docs = "esp_docs.deploy_docs:main"
+
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version = "1.5.0"
+changelog_start_rev = "v1.5.0"
+version_files = [
+    "src/esp_docs/__version__.py",
+]
+update_changelog_on_bump = true

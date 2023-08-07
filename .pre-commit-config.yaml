@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        args: ['--config=.flake8']
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: 3.6.0
+    hooks:
+      - id: commitizen
+      - id: commitizen-branch
+        stages: [push]
